@@ -1,5 +1,7 @@
 # armeria-po2lb
 
+![CI](https://github.com/KarboniteKream/armeria-po2lb/workflows/CI/badge.svg)
+
 A simple load balancer for Armeria using the "Power of Two Choices" selection strategy.
 
 ### References
