@@ -22,27 +22,21 @@ import com.linecorp.armeria.common.HttpResponse;
 import com.linecorp.armeria.common.HttpStatus;
 import com.linecorp.armeria.server.ServerBuilder;
 import com.linecorp.armeria.server.healthcheck.HealthCheckService;
-import com.linecorp.armeria.server.healthcheck.HealthChecker;
+import com.linecorp.armeria.server.healthcheck.SettableHealthChecker;
 import com.linecorp.armeria.testing.junit5.server.ServerExtension;
 
 import io.kream.armeria.po2lb.service.PowerOfTwoServiceDecorator;
 
 public class MyServerExtension extends ServerExtension {
     private final AtomicLong requestCount = new AtomicLong(0);
-
-    private final HealthChecker healthChecker;
-    private volatile boolean health = true;
-
-    public MyServerExtension() {
-        healthChecker = () -> health;
-    }
+    private final SettableHealthChecker healthChecker = new SettableHealthChecker();
 
     public long getRequestCount() {
         return requestCount.longValue();
     }
 
-    public void setHealth(boolean health) {
-        this.health = health;
+    public void setHealthy(boolean healthy) {
+        healthChecker.setHealthy(healthy);
     }
 
     @Override

@@ -100,7 +100,7 @@ class PowerOfTwoServiceDecoratorIntegrationTest {
             assertThat(response.status()).isEqualTo(HttpStatus.OK);
         }
 
-        server2.setHealth(false);
+        server2.setHealthy(false);
         await().until(() -> endpointGroup.endpoints().size() == 3);
 
         final long previousCount = server2.getRequestCount();
